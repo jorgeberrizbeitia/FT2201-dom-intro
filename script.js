@@ -104,23 +104,93 @@ finalThoughsDOM.classList.remove("best-practice")
 
 
 
+
+
+
+
+
+
+
+
 // EVENTOS
 
-let eventTitleDOM = document.querySelector("#event-title")
 
-let defaultColor = eventTitleDOM.style.color
 
-eventTitleDOM.addEventListener( "mouseenter", () => {
-  console.log("mouseenter evento aqui!");
+// functiones arriba
+const changeColor = () => {
+  // console.log("mouseenter evento aqui!");
   eventTitleDOM.innerText = "HOVERING!";
   eventTitleDOM.style.color = "red";
   // background-color
-  eventTitleDOM.style.backgroundColor = "purple"
-} )
+  eventTitleDOM.style.backgroundColor = "purple";
+  finalThoughsDOM.style.color = "blue"
+}
 
-eventTitleDOM.addEventListener( "mouseleave", () => {
+function changeColorBack() {
   eventTitleDOM.innerText = "EVENTS!"
   eventTitleDOM.style.color = defaultColor;
   eventTitleDOM.style.backgroundColor = "green"
-} )
+  finalThoughsDOM.style.color = "yellow"
+}
+
+function logKeys(event) {
+  console.log("clickando teclas!!!")
+  console.log(event.key)
+  let keyPressDOM = document.querySelector("#press-key")
+  keyPressDOM.innerText = event.key
+}
+
+function increaseNumber() {
+  let count = document.querySelector("#counter span")
+  count.innerText = Number(count.innerText) + 1
+  // count.innerText++
+}
+
+function substractNumber() {
+  let count = document.querySelector("#counter span");
+  count.innerText--
+}
+
+function addToList() {
+  
+  let nameInputDOM = document.querySelector("#name")
+  let numberInputDOM = document.querySelector("#number")
+
+  let listDOM = document.querySelector("#output-list")
+
+  // createElement
+  let listItemDOM = document.createElement("li")
+  listItemDOM.innerText = nameInputDOM.value + " " + numberInputDOM.value
+  // console.log(listItemDOM)
+
+  listDOM.appendChild(listItemDOM)
+
+}
+
+function removeButton(event) {
+  console.log(event.target)
+  // .key ???
+  console.log("clicking!!")
+  event.target.remove()
+}
+
+
+// add event listeners y elementos de DOM
+let eventTitleDOM = document.querySelector("#event-title")
+let defaultColor = eventTitleDOM.style.color
+let addButton = document.querySelector("#increment")
+let minusButton = document.querySelector("#decrement")
+let addToListButton = document.querySelector("#add-btn")
+let lastButtons = document.querySelectorAll(".last-btn")
+
+eventTitleDOM.addEventListener( "mouseenter", changeColor )
+eventTitleDOM.addEventListener( "mouseleave", changeColorBack )
+document.addEventListener( "keydown", logKeys )
+addButton.addEventListener( "click", increaseNumber )
+minusButton.addEventListener( "click", substractNumber )
+addToListButton.addEventListener( "click", addToList )
+
+lastButtons.forEach( (eachButton) => {
+  eachButton.addEventListener( "click", removeButton )
+})
 
